@@ -1,8 +1,7 @@
 import org.apache.commons.cli.*;
 
 import java.io.*;
-import java.net.HttpURLConnection;
-import java.net.URL;
+import java.net.*;
 
 
 /**
@@ -41,11 +40,12 @@ public class Convertor {
     /**
      * @param endpoint url to call
      * @param localFile file to save response from api
+     * @return urlConnection for testing output
      * @throws IOException exception if api call return error
      */
-    private static void createPDFFile(URL endpoint, File localFile) throws IOException {
+    public static HttpURLConnection createPDFFile(URL endpoint, File localFile) throws IOException {
         HttpURLConnection urlConnection = null;
-        try {
+         try {
             urlConnection = (HttpURLConnection)endpoint.openConnection();
             BufferedInputStream inputStream = new BufferedInputStream(urlConnection.getInputStream());
 
@@ -71,7 +71,7 @@ public class Convertor {
             }
         }
 
-
+        return urlConnection;
     }
 
     /**
